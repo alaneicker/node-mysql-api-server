@@ -26,7 +26,7 @@ routes.get('/api/users/:id', (req, res) => {
 });
 
 routes.post('/api/users/add', (req, res) => {
-  addUser()
+  addUser(req.body)
     .then(resData => {
       res.send(resData);
     })
@@ -34,7 +34,7 @@ routes.post('/api/users/add', (req, res) => {
 });
 
 routes.put('/api/users/update/:id', (req, res) => {
-  updateUser(req.params.id)
+  updateUser(req.params.id, req.body)
     .then(resData => {
       res.send(resData);
     })

@@ -1,22 +1,20 @@
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import express from 'express';
-import path from 'path';
+import * as migration from 'mysql-migrations';
 import routes from './routes';
-
-import './db-connection';
+import connection from './db-connection';
+import { ENV, PORT, IS_DEV, STATIC_DIR } from './constants';
 
 const app = express();
-const ENV = process.env.NODE_ENV || 'development';
-const PORT = process.env.PORT || 9000;
 
-const staticDir = ENV === 'development' 
-  ? path.join(__dirname, '..', 'dist')
-  : path.join(__dirname, '..');
+if (IS_DEV) {
+  migration.init(connection, __dirname + './migrations');
+} 
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static(staticDir));
+app.use(express.static(STATIC_DIR));
 app.use(cors());
 app.use('/', routes);
 

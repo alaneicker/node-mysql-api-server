@@ -1,7 +1,5 @@
 import mysql from 'mysql';
-import * as migration from 'mysql-migrations';
-
-const ENV = process.env.NODE_ENV || 'development';
+import { ENV } from './constants';
 
 const connection = ENV === 'development'
   ? mysql.createPool({
@@ -18,9 +16,5 @@ const connection = ENV === 'development'
     password : '<password>',
     database : '<database>'
   });
-
-if (ENV === 'development') {
-  migration.init(connection, __dirname + '/migrations');
-} 
 
 export default connection;

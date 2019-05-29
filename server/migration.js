@@ -1,6 +1,6 @@
 module.exports = {
   up: `
-    CREATE TABLE Users (
+    CREATE TABLE users (
       id INTEGER PRIMARY KEY, 
       name VARCHAR,
       email VARCHAR,
@@ -8,7 +8,7 @@ module.exports = {
       password VARCHAR
     );
     
-    INSERT INTO Users (
+    INSERT INTO users (
       name,
       email,
       username, 
@@ -56,5 +56,5 @@ module.exports = {
       'bcrypt$2b$14$.5OgqP0JeLVbd/6qQ6O4S.SQyTjQkG/LSBFH3MjLR6G8mnGo1vMFG'
     );
   `,
-  down: 'DROP TABLE Users',
+  down: 'DROP TABLE users',
 };
