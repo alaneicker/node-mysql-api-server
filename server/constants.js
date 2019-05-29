@@ -1,4 +1,4 @@
-import path from 'path';
+const path = require('path');
 
 const ENV = process.env.NODE_ENV || 'development';
 const IS_DEV = ENV === 'development';
@@ -8,7 +8,7 @@ const STATIC_DIR = IS_DEV
   ? path.join(__dirname, '..', 'dist')
   : path.join(__dirname, '..');
 
-export {
+module.exports = {
   PORT,
   ENV,
   IS_DEV,

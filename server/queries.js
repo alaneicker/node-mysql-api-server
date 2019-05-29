@@ -1,4 +1,4 @@
-import connection from './db-connection';
+const connection = require('./db-connection');
 
 const getUsers = () => {
   return new Promise((resolve, reject) => {
@@ -70,7 +70,7 @@ const deleteUser = id => {
   });
 }
 
-export {
+module.exports = {
   getUsers,
   getUserById,
   addUser,

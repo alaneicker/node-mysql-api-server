@@ -10,18 +10,11 @@
     "mysql-migrations": "^1.0.6",
     "path": "^0.12.7"
   },
-  "devDependencies": {
-    "@babel/cli": "^7.4.4",
-    "@babel/core": "^7.4.5",
-    "@babel/node": "^7.4.5",
-    "@babel/preset-env": "^7.4.5"
-  },
   "scripts": {
-    "db-migrate-up": "node ./server/migration.js up",
-    "db-migrate-down": "node ./server/migration.js down",
-    "dev": "NODE_ENV=development npx babel-node server/index",
-    "build": "babel -d ./dist/server ./server -s",
-    "start": "NODE_ENV=production node dist/server"
+    "migrate:up": "node ./server/migration.js up",
+    "migrate:down": "node ./server/migration.js down",
+    "start:dev": "NODE_ENV=development node server",
+    "start": "NODE_ENV=production node server"
   },
   "author": "Alan Eicker",
   "license": "MIT"

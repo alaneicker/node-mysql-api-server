@@ -1,5 +1,5 @@
-import mysql from 'mysql';
-import { IS_DEV } from './constants';
+const mysql = require('mysql');
+const { IS_DEV } = require('./constants');
 
 const connection = IS_DEV
   ? mysql.createPool({
@@ -17,4 +17,4 @@ const connection = IS_DEV
     database : '<database>'
   });
 
-export default connection;
+module.exports = connection;

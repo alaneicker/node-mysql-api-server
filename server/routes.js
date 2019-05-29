@@ -1,13 +1,12 @@
-import express from 'express';
-import {
+const routes = require('express').Router();
+
+const {
   getUsers,
   getUserById,
   addUser,
   updateUser,
   deleteUser,
-} from './queries'
-
-const routes =  express.Router();
+} = require('./queries');
 
 routes.get('/api/users', (req, res) => {
   getUsers()
@@ -49,4 +48,4 @@ routes.delete('/api/users/delete/:id', (req, res) => {
     .catch(err => console.log(err));
 });
 
-export default routes;
+module.exports = routes;

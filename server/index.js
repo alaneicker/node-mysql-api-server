@@ -1,16 +1,10 @@
-import bodyParser from 'body-parser';
-import cors from 'cors';
-import express from 'express';
-import * as migration from 'mysql-migrations';
-import routes from './routes';
-import connection from './db-connection';
-import { ENV, PORT, IS_DEV, STATIC_DIR } from './constants';
-
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const express = require('express');
+const routes = require('./routes');
 const app = express();
 
-if (IS_DEV) {
-  migration.init(connection, __dirname + './migrations');
-} 
+const { ENV, PORT, STATIC_DIR } = require('./constants');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
