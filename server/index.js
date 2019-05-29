@@ -2,6 +2,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import express from 'express';
 import path from 'path';
+import routes from './routes';
 
 import './db-connection';
 
@@ -17,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(staticDir));
 app.use(cors());
+app.use('/', routes);
 
 app.listen(PORT, () => {
   console.log(`Server running in ${ENV} mode on port ${PORT}`);

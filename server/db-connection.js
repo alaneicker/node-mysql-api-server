@@ -22,3 +22,5 @@ const connection = ENV === 'development'
 if (ENV === 'development') {
   migration.init(connection, __dirname + '/migrations');
 } 
+
+export default connection;
