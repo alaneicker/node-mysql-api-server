@@ -1,7 +1,7 @@
 import mysql from 'mysql';
-import { ENV } from './constants';
+import { IS_DEV } from './constants';
 
-const connection = ENV === 'development'
+const connection = IS_DEV
   ? mysql.createPool({
     connectionLimit : 10,
     host     : 'localhost',
