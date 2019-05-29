@@ -10,8 +10,8 @@
     "path": "^0.12.7"
   },
   "scripts": {
-    "migrate:up": "node ./server/migration.js up",
-    "migrate:down": "node ./server/migration.js down",
+    "migrate:users:up": "node ./server/migrations/users.js up",
+    "migrate:users:down": "node ./server/migrations/users.js down",
     "start:dev": "NODE_ENV=development node server",
     "start": "NODE_ENV=production node server"
   },

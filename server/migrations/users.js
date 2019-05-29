@@ -1,4 +1,4 @@
-const connection = require('./db-connection');
+const connection = require('../db-connection');
 
 const up = connection.query(`
   CREATE TABLE users (
