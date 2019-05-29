@@ -1,5 +1,5 @@
 {
-  "name": "mysql-api-server",
+  "name": "node-mysql-api-server",
   "version": "1.0.0",
   "description": "A simple Node API MySQL Server",
   "dependencies": {
