@@ -7,7 +7,7 @@ import './db-connection';
 
 const app = express();
 const ENV = process.env.NODE_ENV || 'development';
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 9000;
 
 const staticDir = ENV === 'development' 
   ? path.join(__dirname, '..', 'dist')

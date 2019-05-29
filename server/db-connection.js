@@ -1,5 +1,5 @@
 import mysql from 'mysql';
-import * as migration from 'mysql-migration';
+import * as migration from 'mysql-migrations';
 
 const ENV = process.env.NODE_ENV || 'development';
 
