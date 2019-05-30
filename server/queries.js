@@ -37,10 +37,7 @@ const addUser = reqBody => {
 }
 
 const updateUser = (id, reqBody) => {
-  const columns = Object
-                    .keys(reqBody)
-                    .map(column => `${column} = ?`)
-                    .join(',')
+  const columns = Object.keys(reqBody).map(column => `${column} = ?`).join(',')
 
   return new Promise((resolve, reject) => {
     connection.query(`
