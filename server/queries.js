@@ -1,8 +1,8 @@
 const connection = require('./db-connection');
 
-const getUsers = () => {
+const getAllRecords = (table) => {
   return new Promise((resolve, reject) => {
-    connection.query('SELECT * FROM users', (error, results) => {
+    connection.query(`SELECT * FROM ${table}`, (error, results) => {
       if (error) {
         reject(error);
       };
@@ -12,9 +12,9 @@ const getUsers = () => {
   });
 }
 
-const getUserById = id => {
+const getRecordById = (table, id) => {
   return new Promise((resolve, reject) => {
-    connection.query('SELECT * FROM users WHERE id = ?', [id], (error, results) => {
+    connection.query(`SELECT * FROM ${table} WHERE id = ${id}`, (error, results) => {
       if (error) {
         reject(error);
       };
@@ -24,9 +24,9 @@ const getUserById = id => {
   });
 }
 
-const addUser = reqBody => {
+const addRecord = (table, reqBody) => {
   return new Promise((resolve, reject) => {
-    connection.query('INSERT INTO users SET ?', reqBody, (error, results) => {
+    connection.query(`INSERT INTO ${table} SET ?`, reqBody, (error, results) => {
       if (error) {
         reject(error);
       };
@@ -36,15 +36,12 @@ const addUser = reqBody => {
   });
 }
 
-const updateUser = (id, reqBody) => {
+const updateRecord = (table, id, reqBody) => {
   const columns = Object.keys(reqBody).map(column => `${column} = ?`).join(',')
+  const values = Object.values(reqBody);
 
   return new Promise((resolve, reject) => {
-    connection.query(`
-      UPDATE users 
-      SET ${columns}
-      WHERE id = ${id}
-    `, Object.values(reqBody), (error, results) => {
+    connection.query(`UPDATE ${table} SET ${columns} WHERE id = ${id}`, values, (error, results) => {
       if (error) {
         reject(error);
       };
@@ -54,9 +51,9 @@ const updateUser = (id, reqBody) => {
   });
 }
 
-const deleteUser = id => {
+const deleteRecord = (table, id) => {
   return new Promise((resolve, reject) => {
-    connection.query('DELETE FROM users WHERE id = ?', [id], (error, results) => {
+    connection.query(`DELETE FROM ${table} WHERE id = ${id}`, (error, results) => {
       if (error) {
         reject(error);
       };
@@ -67,9 +64,9 @@ const deleteUser = id => {
 }
 
 module.exports = {
-  getUsers,
-  getUserById,
-  addUser,
-  updateUser,
-  deleteUser,
+  getAllRecords,
+  getRecordById,
+  addRecord,
+  updateRecord,
+  deleteRecord,
 };
