@@ -1,8 +1,8 @@
 const connection = require('./db-connection');
 const records = require('./seed-data.json');
 
-module.exports = {
-  up() {
+const up = () => {
+  return new Promise(resolve => {
     connection.query(`
       CREATE TABLE users (
         id INT NOT NULL AUTO_INCREMENT, 
@@ -16,18 +16,26 @@ module.exports = {
       };
 
       console.log('DATABASE MIGRATED: ', results);
+      resolve();
     });
-  },
-  down() {
+  });
+};
+
+const down = () => {
+  return new Promise(resolve => {
     connection.query('DROP TABLE users', (error, results) => {
       if (error) {
         throw new Error(error);
       };
     
       console.log('DATABASE TABLE DROPPED: ', results);
+      resolve();
     });
-  },
-  seed() {
+  });
+};
+
+const seed = () => {
+  return new Promise(resolve => {
     connection.query(`
       INSERT INTO users (username, password) VALUES ?
     `, [records], (error, results) => {
@@ -36,8 +44,15 @@ module.exports = {
       };
 
       console.log('DATABASE TABLE SEEDED: ', results);
+      resolve();
     });
-  },
+  });
 };
+
+const setup = () => {
+  up().then(seed());
+}
+
+module.exports = { up, down, seed, setup };
 
 require('make-runnable');

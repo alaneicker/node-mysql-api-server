@@ -14,8 +14,10 @@
     "migrate:up": "node server/migrations.js up",
     "migrate:down": "node server/migrations.js down",
     "migrate:seed": "node server/migrations.js seed",
+    "migrate:setup": "node server/migrations.js setup",
     "start:dev": "NODE_ENV=development node server",
-    "start": "NODE_ENV=production node server"
+    "start": "NODE_ENV=production node server",
+    "postinstall": "npm run migrate:setup"
   },
   "author": "Alan Eicker",
   "license": "MIT"
