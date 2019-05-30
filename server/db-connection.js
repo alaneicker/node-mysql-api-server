@@ -3,18 +3,19 @@ const { IS_DEV } = require('./constants');
 
 const connection = IS_DEV
   ? mysql.createPool({
-    connectionLimit : 10,
     host     : 'localhost',
     user     : 'root',
     password : 'root',
-    database : 'Users'
+    database : 'users',
+    socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock',
+    connectionLimit : 10,
   })
   : mysql.createPool({
-    connectionLimit : 10,
     host     : '<database>',
     user     : '<root>',
     password : '<password>',
-    database : '<database>'
+    database : '<database>',
+    connectionLimit : 10,
   });
 
 module.exports = connection;
