@@ -1,35 +1,5 @@
 const connection = require('./db-connection');
-
-const records = [
-  [
-    'alaneicker',
-    'bcrypt$2b$14$.5OgqP0JeLVbd/6qQ6O4S.SQyTjQkG/LSBFH3MjLR6G8mnGo1vMFG'
-  ],
-  [
-    'jdoe',
-    'bcrypt$2b$14$.5OgqP0JeLVbd/6qQ6O4S.SQyTjQkG/LSBFH3MjLR6G8mnGo1vMFG'
-  ],
-  [
-    'frednelson',
-    'bcrypt$2b$14$.5OgqP0JeLVbd/6qQ6O4S.SQyTjQkG/LSBFH3MjLR6G8mnGo1vMFG'
-  ],
-  [
-    'msmith',
-    'bcrypt$2b$14$.5OgqP0JeLVbd/6qQ6O4S.SQyTjQkG/LSBFH3MjLR6G8mnGo1vMFG'
-  ],
-  [
-    'bobnewhart',
-    'bcrypt$2b$14$.5OgqP0JeLVbd/6qQ6O4S.SQyTjQkG/LSBFH3MjLR6G8mnGo1vMFG'
-  ],
-  [
-    'paulmonson',
-    'bcrypt$2b$14$.5OgqP0JeLVbd/6qQ6O4S.SQyTjQkG/LSBFH3MjLR6G8mnGo1vMFG'
-  ],
-  [
-    'johnj',
-    'bcrypt$2b$14$.5OgqP0JeLVbd/6qQ6O4S.SQyTjQkG/LSBFH3MjLR6G8mnGo1vMFG'
-  ]
-];
+const records = require('./seed-data.json');
 
 module.exports = {
   up() {
