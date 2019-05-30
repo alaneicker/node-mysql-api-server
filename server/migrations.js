@@ -4,7 +4,7 @@ const records = require('./seed-data.json');
 const up = () => {
   return new Promise(resolve => {
     connection.query(`
-      CREATE TABLE users (
+      CREATE TABLE user_login (
         id INT NOT NULL AUTO_INCREMENT, 
         username VARCHAR(15) NOT NULL, 
         password VARCHAR(75) NOT NULL,
@@ -23,7 +23,7 @@ const up = () => {
 
 const down = () => {
   return new Promise(resolve => {
-    connection.query('DROP TABLE users', (error, results) => {
+    connection.query('DROP TABLE user_login', (error, results) => {
       if (error) {
         throw new Error(error);
       };
@@ -37,7 +37,7 @@ const down = () => {
 const seed = () => {
   return new Promise(resolve => {
     connection.query(`
-      INSERT INTO users (username, password) VALUES ?
+      INSERT INTO user_login (username, password) VALUES ?
     `, [records], (error, results) => {
       if (error) {
         throw new Error(error);

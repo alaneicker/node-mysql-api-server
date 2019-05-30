@@ -1,6 +1,8 @@
 const connection = require('./db-connection');
 
-const getAllRecords = (table) => {
+const getAllRecords = (reqBody) => {
+  const { table } = reqBody;
+
   return new Promise((resolve, reject) => {
     connection.query(`SELECT * FROM ${table}`, (error, results) => {
       if (error) {
@@ -12,7 +14,9 @@ const getAllRecords = (table) => {
   });
 }
 
-const getRecordById = (table, id) => {
+const getRecordById = (reqBody, id) => {
+  const { table } = reqBody;
+
   return new Promise((resolve, reject) => {
     connection.query(`SELECT * FROM ${table} WHERE id = ${id}`, (error, results) => {
       if (error) {
@@ -24,9 +28,11 @@ const getRecordById = (table, id) => {
   });
 }
 
-const addRecord = (table, reqBody) => {
+const addRecord = (reqBody) => {
+  const { table, ...values } = reqBody;
+
   return new Promise((resolve, reject) => {
-    connection.query(`INSERT INTO ${table} SET ?`, reqBody, (error, results) => {
+    connection.query(`INSERT INTO ${table} SET ?`, values, (error, results) => {
       if (error) {
         reject(error);
       };
@@ -36,9 +42,9 @@ const addRecord = (table, reqBody) => {
   });
 }
 
-const updateRecord = (table, id, reqBody) => {
+const updateRecord = (reqBody, id) => {
   const columns = Object.keys(reqBody).map(column => `${column} = ?`).join(',')
-  const values = Object.values(reqBody);
+  const { table, ...values } = reqBody;
 
   return new Promise((resolve, reject) => {
     connection.query(`UPDATE ${table} SET ${columns} WHERE id = ${id}`, values, (error, results) => {
@@ -51,7 +57,9 @@ const updateRecord = (table, id, reqBody) => {
   });
 }
 
-const deleteRecord = (table, id) => {
+const deleteRecord = (reqBody, id) => {
+  const { table } = reqBody;
+  
   return new Promise((resolve, reject) => {
     connection.query(`DELETE FROM ${table} WHERE id = ${id}`, (error, results) => {
       if (error) {

@@ -8,40 +8,40 @@ const {
   deleteRecord,
 } = require('./queries');
 
-routes.get('/api/:table', (req, res) => {
-  getAllRecords(req.params.table)
+routes.get('/api/get-all-records', (req, res) => {
+  getAllRecords(req.body)
     .then(resData => {
       res.send(resData);
     })
     .catch(err => console.log(err));
 });
 
-routes.get('/api/:table/:id', (req, res) => {
-  getRecordById(req.params.table, req.params.id)
+routes.get('/api/get-record-by-id/:id', (req, res) => {
+  getRecordById(req.body, req.params.id)
     .then(resData => {
       res.send(resData);
     })
     .catch(err => console.log(err));
 });
 
-routes.post('/api/:table/add', (req, res) => {
-  addRecord(req.params.table, req.body)
+routes.post('/api/add-record', (req, res) => {
+  addRecord(req.body)
     .then(resData => {
       res.send(resData);
     })
     .catch(err => console.log(err));
 });
 
-routes.put('/api/:table/update/:id', (req, res) => {
-  updateRecord(req.params.table, req.params.id, req.body)
+routes.put('/api/update-record/:id', (req, res) => {
+  updateRecord(req.body, req.params.id)
     .then(resData => {
       res.send(resData);
     })
     .catch(err => console.log(err));
 });
 
-routes.delete('/api/:table/delete/:id', (req, res) => {
-  deleteRecord(req.params.table, req.params.id)
+routes.delete('/api/delete-record/:id', (req, res) => {
+  deleteRecord(req.body, req.params.id)
     .then(resData => {
       res.send(resData);
     })
