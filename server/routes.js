@@ -16,7 +16,7 @@ routes.get('/api/get-all-records', (req, res) => {
     .catch(err => console.log(err));
 });
 
-routes.get('/api/get-record-by-id/:id', (req, res) => {
+routes.get('/api/get-record/:id', (req, res) => {
   getRecordById(req.body, req.params.id)
     .then(resData => {
       res.send(resData);

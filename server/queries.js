@@ -47,7 +47,7 @@ const updateRecord = (reqBody, id) => {
   const columns = Object.keys(values).map(column => `${column} = ?`).join(',')
 
   return new Promise((resolve, reject) => {
-    connection.query(`UPDATE ${table} SET ${columns} WHERE id = ${id}`, values, (error, results) => {
+    connection.query(`UPDATE ${table} SET ${columns} WHERE id = ${id}`, Object.values(values), (error, results) => {
       if (error) {
         reject(error);
       };
