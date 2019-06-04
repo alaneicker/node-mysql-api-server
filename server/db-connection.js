@@ -22,10 +22,10 @@ const config = Object.assign(
     user: DB_USER,
     password: DB_PASSWORD,
     database: DB,
-    connectionLimit: DB_CONNECTION_LIMIT,
   }, 
-  (SOCKET_PATH ? { socketPath: SOCKET_PATH } : null),
+  (DB_CONNECTION_LIMIT ? { connectionLimit: DB_CONNECTION_LIMIT } : null),
   (DB_PORT ? { port: DB_PORT } : null),
+  (SOCKET_PATH ? { socketPath: SOCKET_PATH } : null),
 );
 
 const connection = mysql.createPool(config);
