@@ -1,10 +1,10 @@
 const connection = require('./db-connection');
 
 const getAllRecords = (reqBody) => {
-  const { table } = reqBody;
-
+  const { table, columns = ['*'] } = reqBody;
+  
   return new Promise((resolve, reject) => {
-    connection.query(`SELECT * FROM ${table}`, (error, results) => {
+    connection.query(`SELECT ${columns.join(',')} FROM ${table}`, (error, results) => {
       if (error) {
         reject(error);
       };
@@ -15,10 +15,10 @@ const getAllRecords = (reqBody) => {
 }
 
 const getRecordById = (reqBody, id) => {
-  const { table } = reqBody;
+  const { table, columns = ['*'] } = reqBody;
 
   return new Promise((resolve, reject) => {
-    connection.query(`SELECT * FROM ${table} WHERE id = ${id}`, (error, results) => {
+    connection.query(`SELECT ${columns.join(',')} FROM ${table} WHERE id = ${id}`, (error, results) => {
       if (error) {
         reject(error);
       };

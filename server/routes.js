@@ -13,7 +13,7 @@ routes.get('/api/get-all-records', (req, res) => {
     .then(resData => {
       res.send(resData);
     })
-    .catch(err => console.log(err));
+    .catch(err => { throw new Error(err) });
 });
 
 routes.get('/api/get-record/:id', (req, res) => {
@@ -21,7 +21,7 @@ routes.get('/api/get-record/:id', (req, res) => {
     .then(resData => {
       res.send(resData);
     })
-    .catch(err => console.log(err));
+    .catch(err => { throw new Error(err) });
 });
 
 routes.post('/api/add-record', (req, res) => {
@@ -29,7 +29,7 @@ routes.post('/api/add-record', (req, res) => {
     .then(resData => {
       res.send(resData);
     })
-    .catch(err => console.log(err));
+    .catch(err => { throw new Error(err) });
 });
 
 routes.put('/api/update-record/:id', (req, res) => {
@@ -37,7 +37,7 @@ routes.put('/api/update-record/:id', (req, res) => {
     .then(resData => {
       res.send(resData);
     })
-    .catch(err => console.log(err));
+    .catch(err => { throw new Error(err) });
 });
 
 routes.delete('/api/delete-record/:id', (req, res) => {
@@ -45,7 +45,7 @@ routes.delete('/api/delete-record/:id', (req, res) => {
     .then(resData => {
       res.send(resData);
     })
-    .catch(err => console.log(err));
+    .catch(err => { throw new Error(err) });
 });
 
 module.exports = routes;
