@@ -7,13 +7,13 @@ require('dotenv').config({
 });
 
 const {
-  IS_DEV,
   DB,
   DB_HOST,
   DB_USER,
   DB_PASSWORD,
   DB_PORT,
   DB_CONNECTION_LIMIT,
+  SOCKET_PATH,
 } = process.env;
 
 const config = Object.assign(
@@ -24,7 +24,7 @@ const config = Object.assign(
     database: DB,
     connectionLimit: DB_CONNECTION_LIMIT,
   }, 
-  (IS_DEV ? { socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock' } : null),
+  (SOCKET_PATH ? { socketPath: SOCKET_PATH } : null),
   (DB_PORT ? { port: DB_PORT } : null),
 );
 
