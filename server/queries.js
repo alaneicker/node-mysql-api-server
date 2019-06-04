@@ -4,7 +4,10 @@ const getAllRecords = (reqBody) => {
   const { table, columns = ['*'] } = reqBody;
   
   return new Promise((resolve, reject) => {
-    connection.query(`SELECT ${columns.join(',')} FROM ${table}`, (error, results) => {
+    connection.query(`
+      SELECT ${columns.join(',')}
+      FROM ${table}
+    `, (error, results) => {
       if (error) {
         reject(error);
       };
@@ -18,7 +21,11 @@ const getRecordById = (reqBody, id) => {
   const { table, columns = ['*'] } = reqBody;
 
   return new Promise((resolve, reject) => {
-    connection.query(`SELECT ${columns.join(',')} FROM ${table} WHERE id = ${id}`, (error, results) => {
+    connection.query(`
+      SELECT ${columns.join(',')}
+      FROM ${table}
+      WHERE id = ${id}
+    `, (error, results) => {
       if (error) {
         reject(error);
       };
@@ -32,7 +39,10 @@ const addRecord = (reqBody) => {
   const { table, ...values } = reqBody;
 
   return new Promise((resolve, reject) => {
-    connection.query(`INSERT INTO ${table} SET ?`, values, (error, results) => {
+    connection.query(`
+      INSERT INTO ${table} 
+      SET ?
+    `, values, (error, results) => {
       if (error) {
         reject(error);
       };
@@ -47,7 +57,11 @@ const updateRecord = (reqBody, id) => {
   const columns = Object.keys(values).map(column => `${column} = ?`).join(',')
 
   return new Promise((resolve, reject) => {
-    connection.query(`UPDATE ${table} SET ${columns} WHERE id = ${id}`, Object.values(values), (error, results) => {
+    connection.query(`
+      UPDATE ${table}
+      SET ${columns}
+      WHERE id = ${id}
+    `, Object.values(values), (error, results) => {
       if (error) {
         reject(error);
       };
@@ -61,7 +75,10 @@ const deleteRecord = (reqBody, id) => {
   const { table } = reqBody;
   
   return new Promise((resolve, reject) => {
-    connection.query(`DELETE FROM ${table} WHERE id = ${id}`, (error, results) => {
+    connection.query(`
+      DELETE FROM ${table}
+      WHERE id = ${id}
+    `, (error, results) => {
       if (error) {
         reject(error);
       };
