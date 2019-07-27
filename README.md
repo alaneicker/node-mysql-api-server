@@ -18,7 +18,7 @@ npm install
 
 ## Environment Variables
 
-Navigate to `env/` directory and update the .env files with your local and production environment settings.
+Navigate to `env/` directory and update the `.env.development` and `.env.production` files with your environment settings.
 
 ```
 DB_HOST=<host>
@@ -26,6 +26,18 @@ DB_USER=<user>
 DB_PASSWORD=<password>
 DB_CONNECTION_LIMIT=20
 DB=users
+```
+
+## Run the API Server
+
+Development mode
+```
+npm run start:dev
+```
+
+Production mode
+```
+npm run start
 ```
 
 ## Endpoints
