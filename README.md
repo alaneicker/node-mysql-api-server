@@ -39,13 +39,12 @@ const response = await fetch('/api/users/users/1?&columns=username');
 #### `/api/:table/add`
 
 ```javascript
-const response = await fetch('/api/users/add', {
-  method: 'POST',
-  body: { 
-    username: 'my_username', 
-    password: 'bcrypt$2b$14$.5OgqP0JeLVbd/6qQ6O4S.SQyTjQkG/LSBFH3MjLR6G8mnGo1vMFG', 
-  }
-}); 
+const body = { 
+  username: 'my_username', 
+  password: 'bcrypt$2b$14$.5OgqP0JeLVbd/6qQ6O4S.SQyTjQkG/LSBFH3MjLR6G8mnGo1vMFG', 
+};
+
+const response = await fetch('/api/users/add', { method: 'POST', body }); 
 ```
 
 ### PUT
@@ -53,10 +52,9 @@ const response = await fetch('/api/users/add', {
 #### `/api/:table/update/:id`
 
 ```javascript
-const response = await fetch('/api/users/update/1', {
-  method: 'PUT',
-  body: { username: 'my_updated_username'},
-}); 
+const body = { username: 'my_updated_username'};
+
+const response = await fetch('/api/users/update/1', { method: 'PUT', body }); 
 ```
 
 ### DELETE
