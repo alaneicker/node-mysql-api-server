@@ -8,45 +8,54 @@ const {
   deleteRecord,
 } = require('./queries');
 
-routes.get('/api/get-all-records', async (req, res) => {
+routes.get('/api/:table', async (req, res) => {
   try {
-    const response = await getAllRecords(req.body);
+    const { table } = req.params;
+    const { columns } = req.query;
+    const response = await getAllRecords(table, columns);
     res.send(response);
   } catch (err) {
     res.send(err);
   }
 });
 
-routes.get('/api/get-record/:id', async (req, res) => {
+routes.get('/api/:table/:id', async (req, res) => {
   try {
-    const response = await getRecordById(req.body, req.params.id);
+    const { table, id } = req.params;
+    const { columns } = req.query;
+    const response = await getRecordById(table, columns, id);
     res.send(response);
   } catch (err) {
     res.send(err);
   }
 });
 
-routes.post('/api/add-record', async (req, res) => {
+routes.post('/api/:table/add', async (req, res) => {
   try {
-    const response = await addRecord(req.body);
+    const { table } = req.params;
+    const { body } = req;
+    const response = await addRecord(table, body);
     res.send(response);
   } catch (err) {
     res.send(err);
   }
 });
 
-routes.put('/api/update-record/:id', async (req, res) => {
+routes.put('/api/:table/update/:id', async (req, res) => {
   try {
-    const response = await updateRecord(req.body, req.params.id);
+    const { table, id } = req.params;
+    const { body } = req;
+    const response = await updateRecord(table, body, id);
     res.send(response);
   } catch (err) {
     res.send(err);
   }
 });
 
-routes.delete('/api/delete-record/:id', async (req, res) => {
+routes.delete('/api/:table/delete/:id', async (req, res) => {
   try {
-    const response = await deleteRecord(req.body, req.params.id);
+    const { table, id } = req.params;
+    const response = await deleteRecord(table, id);
     res.send(response);
   } catch (err) {
     res.send(err);

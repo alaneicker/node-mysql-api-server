@@ -22,45 +22,47 @@ DB=users
 
 ### GET
 
-#### `/api/get-all-records`
+#### `/api/:table`
 
 ```javascript
-const { data } = await axios.get('/api/get-all-records', { table: 'users' }); 
+const response = await fetch('/api/users?&columns=username'); 
 ```
 
-#### `/api/get-record/:id`
+#### `/api/:table/:id`
 
 ```javascript
-const { data } = await axios.get('/api/get-record/1', { table: 'users' }); 
+const response = await fetch('/api/users/users/1?&columns=username'); 
 ```
 
 ### POST
 
-#### `/api/add-record`
+#### `/api/:table/add`
 
 ```javascript
-const { data } = await axios.post('/api/add-record', { 
-  table: 'users', 
-  username: 'my_username', 
-  password: 'bcrypt$2b$14$.5OgqP0JeLVbd/6qQ6O4S.SQyTjQkG/LSBFH3MjLR6G8mnGo1vMFG', 
+const response = await fetch('/api/users/add', {
+  method: 'POST',
+  body: { 
+    username: 'my_username', 
+    password: 'bcrypt$2b$14$.5OgqP0JeLVbd/6qQ6O4S.SQyTjQkG/LSBFH3MjLR6G8mnGo1vMFG', 
+  }
 }); 
 ```
 
 ### PUT
 
-#### `/api/update-record/:id`
+#### `/api/:table/update/:id`
 
 ```javascript
-const { data } = await axios.put('/api/update-record/1', { 
-  table: 'users', 
-  username: 'my_updated_username', 
+const response = await fetch('/api/users/update/1', {
+  method: 'PUT',
+  body: { username: 'my_updated_username'},
 }); 
 ```
 
 ### DELETE
 
-#### `/api/delete-record/:id`
+#### `/api/:table/delete/:id`
 
 ```javascript
-const { data } = await axios.delete('/api/delete-record/1', { table: 'users' }); 
+const response = await fetch('/api/users/delete/1', { method: 'DELETE' }); 
 ```

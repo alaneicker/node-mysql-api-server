@@ -1,12 +1,10 @@
 const { query } = require('./db-connection');
 
-const getAllRecords = (reqBody) => {
-  const { table, columns = ['*'] } = reqBody;
-  
+const getAllRecords = (table, columns = '*') => {  
   return new Promise(async (resolve, reject) => {
     try {
       const result = await query(`
-        SELECT ${columns.join(',')}
+        SELECT ${columns}
         FROM ${table}
       `);
       resolve(result);
@@ -16,12 +14,11 @@ const getAllRecords = (reqBody) => {
   });
 }
 
-const getRecordById = (reqBody, id) => {
+const getRecordById = (table, columns = '*', id) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const { table, columns = ['*'] } = reqBody;
       const result = await query(`
-        SELECT ${columns.join(',')}
+        SELECT ${columns}
         FROM ${table}
         WHERE id = ${id}
       `);
@@ -32,14 +29,13 @@ const getRecordById = (reqBody, id) => {
   });
 }
 
-const addRecord = (reqBody) => {
+const addRecord = (table, body) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const { table, ...values } = reqBody;
       const result = await query(`
         INSERT INTO ${table} 
         SET ?
-      `, values);
+      `, body);
       resolve(result);
     } catch (err) {
       reject(err);
@@ -47,16 +43,15 @@ const addRecord = (reqBody) => {
   });
 }
 
-const updateRecord = (reqBody, id) => {
+const updateRecord = (table, body, id) => {
   return new Promise((resolve, reject) => {
     try {
-      const { table, ...values } = reqBody;
-      const columns = Object.keys(values).map(column => `${column} = ?`).join(',');
+      const columns = Object.keys(body).map(column => `${column} = ?`).join(',');
       const result = query(`
         UPDATE ${table}
         SET ${columns}
         WHERE id = ${id}
-      `, Object.values(values));
+      `, Object.values(body));
       resolve(result);
     } catch (err) {
       reject(err);
@@ -64,10 +59,9 @@ const updateRecord = (reqBody, id) => {
   });
 }
 
-const deleteRecord = (reqBody, id) => {
+const deleteRecord = (table, id) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const { table } = reqBody;
       const result = await query(`
         DELETE FROM ${table}
         WHERE id = ${id}
