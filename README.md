@@ -12,7 +12,9 @@ A simple API Server that can be used to query any MySQL database and table
 
 After cloning the repositiory, run the following command.
 
-`npm install`
+```
+npm install
+```
 
 ## Environment Variables
 
