@@ -10,7 +10,8 @@
     "migrate:seed": "node server/migrations.js seed",
     "migrate:setup": "node server/migrations.js setup",
     "start:dev": "NODE_ENV=development nodemon server",
-    "start": "NODE_ENV=production node server"
+    "start": "NODE_ENV=production node server",
+    "postinstall": "npm run start"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
