@@ -8,7 +8,15 @@ A simple API Server that can be used to query any MySQL database and table
 - Express
 - MySQL
 
+## Project Setup
+
+After cloning the repositiory, run the following command.
+
+`npm install`
+
 ## Environment Variables
+
+Navigate to `env/` directory and update the .env files with your local and production environment settings.
 
 ```
 DB_HOST=<host>
