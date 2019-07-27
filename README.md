@@ -10,7 +10,7 @@ A simple API Server that can be used to query any MySQL database and table
 
 ## Endpoints
 
-## GET
+### GET
 
 #### `/api/get-all-records`
 
@@ -24,7 +24,7 @@ const { data } = await axios.get('/api/get-all-records', { table: 'users' });
 const { data } = await axios.get('/api/get-record/1', { table: 'users' }); 
 ```
 
-## POST
+### POST
 
 #### `/api/add-record`
 
@@ -36,7 +36,7 @@ const { data } = await axios.post('/api/add-record', {
 }); 
 ```
 
-## PUT
+### PUT
 
 #### `/api/update-record/:id`
 
@@ -47,7 +47,7 @@ const { data } = await axios.put('/api/update-record/1', {
 }); 
 ```
 
-## DELETE
+### DELETE
 
 #### `/api/delete-record/:id`
 
