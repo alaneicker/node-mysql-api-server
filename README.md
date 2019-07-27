@@ -8,6 +8,16 @@ A simple API Server that can be used to query any MySQL database and table
 - Express
 - MySQL
 
+## Environment Variables
+
+```
+DB_HOST=<host>
+DB_USER=<user>
+DB_PASSWORD=<password>
+DB_CONNECTION_LIMIT=20
+DB=users
+```
+
 ## Endpoints
 
 ### GET
