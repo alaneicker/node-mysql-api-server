@@ -1,5 +1,6 @@
 const mysql = require('mysql');
 const path = require('path');
+const { promisify } = require('util');
 
 require('dotenv').config({ 
   path: path.resolve(__dirname, `../env/.env.${process.env.NODE_ENV}`) 
@@ -34,5 +35,9 @@ const config = Object.assign(
 );
 
 const connection = mysql.createPool(config);
+const query = promisify(connection.query).bind(connection);
 
-module.exports = connection;
+module.exports = {
+  connection,
+  query,
+};
