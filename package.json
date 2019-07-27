@@ -2,6 +2,16 @@
   "name": "node-mysql-api-server",
   "version": "1.0.0",
   "description": "A simple Node API MySQL Server",
+  "author": "Alan Eicker",
+  "license": "MIT",
+  "scripts": {
+    "migrate:up": "node server/migrations.js up",
+    "migrate:down": "node server/migrations.js down",
+    "migrate:seed": "node server/migrations.js seed",
+    "migrate:setup": "node server/migrations.js setup",
+    "start:dev": "NODE_ENV=development nodemon server",
+    "start": "NODE_ENV=production node server"
+  },
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
@@ -10,14 +20,7 @@
     "mysql": "^2.17.1",
     "path": "^0.12.7"
   },
-  "scripts": {
-    "migrate:up": "node server/migrations.js up",
-    "migrate:down": "node server/migrations.js down",
-    "migrate:seed": "node server/migrations.js seed",
-    "migrate:setup": "node server/migrations.js setup",
-    "start:dev": "NODE_ENV=development node server",
-    "start": "NODE_ENV=production node server"
-  },
-  "author": "Alan Eicker",
-  "license": "MIT"
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
 }
