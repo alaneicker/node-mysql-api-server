@@ -44,7 +44,7 @@ npm run start
 
 ### GET
 
-**Note:** Specific columns can be returned by adding them as paramerters to the URL - e.g. `?columns=name,email,phone`. By default, if no columns are specified, the returned response will include all columns.
+**Note:** Specific columns can be returned by adding them as paramerters to the URL - e.g. `?columns=name,email,phone`. By default, if no columns are specified, the returned response will include all columns. Column names are separated by a comma.
 
 #### `/api/:table`
 
