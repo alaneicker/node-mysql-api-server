@@ -25,7 +25,7 @@ DB_HOST=<host>
 DB_USER=<user>
 DB_PASSWORD=<password>
 DB_CONNECTION_LIMIT=20
-DB=users
+DB=contacts
 ```
 
 ## Run the API Server
@@ -44,16 +44,18 @@ npm run start
 
 ### GET
 
+**Note:** Specific columns can be returned by adding them as paramerters to the URL - e.g. `?columns=name,email,phone`. By default, if no columns are specified, the returned response will include all columns.
+
 #### `/api/:table`
 
 ```javascript
-const response = await fetch('/api/users?&columns=username'); 
+const response = await fetch('/api/contacts?&columns=name,email,phone'); 
 ```
 
 #### `/api/:table/:id`
 
 ```javascript
-const response = await fetch('/api/users/users/1?&columns=username'); 
+const response = await fetch('/api/contacts/1?&columns=name,email,phone'); 
 ```
 
 ### POST
@@ -62,11 +64,12 @@ const response = await fetch('/api/users/users/1?&columns=username');
 
 ```javascript
 const body = { 
-  username: 'my_username', 
-  password: 'my_password', 
+  name: 'Bob Smith', 
+  email: 'b_smith1234@gmail.com', 
+  phone: '555-555-1234',
 };
 
-const response = await fetch('/api/users/add', { method: 'POST', body }); 
+const response = await fetch('/api/contacts/add', { method: 'POST', body }); 
 ```
 
 ### PUT
@@ -74,9 +77,9 @@ const response = await fetch('/api/users/add', { method: 'POST', body });
 #### `/api/:table/update/:id`
 
 ```javascript
-const body = { username: 'my_updated_username'};
+const body = { phone: '555-555-4321'};
 
-const response = await fetch('/api/users/update/1', { method: 'PUT', body }); 
+const response = await fetch('/api/contacts/update/1', { method: 'PUT', body }); 
 ```
 
 ### DELETE
@@ -84,5 +87,5 @@ const response = await fetch('/api/users/update/1', { method: 'PUT', body });
 #### `/api/:table/delete/:id`
 
 ```javascript
-const response = await fetch('/api/users/delete/1', { method: 'DELETE' }); 
+const response = await fetch('/api/contacts/delete/1', { method: 'DELETE' }); 
 ```
