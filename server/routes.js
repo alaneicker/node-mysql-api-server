@@ -1,12 +1,5 @@
 const routes = require('express').Router();
-
-const {
-  getAllRecords,
-  getRecordById,
-  addRecord,
-  updateRecord,
-  deleteRecord,
-} = require('./queries');
+const { query } = require('./db-connection');
 
 routes.get('/api/:table', async (req, res) => {
   try {
@@ -14,7 +7,7 @@ routes.get('/api/:table', async (req, res) => {
       params: { table }, 
       query: { columns = '*' },
     } = req;
-    const response = await getAllRecords(table, columns);
+    const response = await query(`SELECT ${columns} FROM ${table}`);
     res.send(response);
   } catch (err) {
     res.send(err);
@@ -27,7 +20,7 @@ routes.get('/api/:table/:id', async (req, res) => {
       params: { table, id },
       query: { columns = '*' }
     } = req;
-    const response = await getRecordById(table, columns, id);
+    const response = await query(`SELECT ${columns} FROM ${table} WHERE id = ${id}`);
     res.send(response);
   } catch (err) {
     res.send(err);
@@ -40,7 +33,7 @@ routes.post('/api/:table/add', async (req, res) => {
       params: { table },
       body,
     } = req;
-    const response = await addRecord(table, body);
+    const response = await query(`INSERT INTO ${table} SET ?`, body);
     res.send(response);
   } catch (err) {
     res.send(err);
@@ -53,7 +46,11 @@ routes.put('/api/:table/update/:id', async (req, res) => {
       params: { table, id },
       body,
     } = req;
-    const response = await updateRecord(table, body, id);
+    const columns = Object.keys(body).map(column => `${column} = ?`).join(',');
+    const response = await query(
+      `UPDATE ${table} SET ${columns} WHERE id = ${id}`
+      , Object.values(body)
+    );
     res.send(response);
   } catch (err) {
     res.send(err);
@@ -65,7 +62,7 @@ routes.delete('/api/:table/delete/:id', async (req, res) => {
     const {
       params: { table, id },
     } = req;
-    const response = await deleteRecord(table, id);
+    const response = await query(`DELETE FROM ${table} WHERE id = ${id}`);
     res.send(response);
   } catch (err) {
     res.send(err);

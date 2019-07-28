@@ -13,7 +13,7 @@ const up = () => {
     `, (error, results) => {
       if (error) {
         throw new Error(error);
-      };
+      }
 
       console.log('DATABASE MIGRATED: ', results);
       resolve();
@@ -26,7 +26,7 @@ const down = () => {
     connection.query('DROP TABLE user_login', (error, results) => {
       if (error) {
         throw new Error(error);
-      };
+      }
     
       console.log('DATABASE TABLE DROPPED: ', results);
       resolve();
@@ -41,7 +41,7 @@ const seed = () => {
     `, [records], (error, results) => {
       if (error) {
         throw new Error(error);
-      };
+      }
 
       console.log('DATABASE TABLE SEEDED: ', results);
       resolve();
@@ -51,7 +51,7 @@ const seed = () => {
 
 const setup = () => {
   up().then(seed());
-}
+};
 
 module.exports = { up, down, seed, setup };
 
