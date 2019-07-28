@@ -1,58 +1,40 @@
-const connection = require('./db-connection');
+const { query } = require('./db-connection');
 const records = require('./seed-data.json');
 
-const up = () => {
-  return new Promise(resolve => {
-    connection.query(`
+const up = async () => {
+  try {
+    const response = await query(`
       CREATE TABLE user_login (
         id INT NOT NULL AUTO_INCREMENT, 
         username VARCHAR(15) NOT NULL, 
         password VARCHAR(75) NOT NULL,
         PRIMARY KEY (id)
       )
-    `, (error, results) => {
-      if (error) {
-        throw new Error(error);
-      }
-
-      console.log('DATABASE MIGRATED: ', results);
-      resolve();
-    });
-  });
+    `);
+    return response;
+  } catch (err) {
+    return err;
+  }
 };
 
-const down = () => {
-  return new Promise(resolve => {
-    connection.query('DROP TABLE user_login', (error, results) => {
-      if (error) {
-        throw new Error(error);
-      }
-    
-      console.log('DATABASE TABLE DROPPED: ', results);
-      resolve();
-    });
-  });
+const down = async () => {
+  try {
+    const response = await query('DROP TABLE user_login');
+    return response;
+  } catch (err) {
+    return err;
+  }
 };
 
-const seed = () => {
-  return new Promise(resolve => {
-    connection.query(`
-      INSERT INTO user_login (username, password) VALUES ?
-    `, [records], (error, results) => {
-      if (error) {
-        throw new Error(error);
-      }
-
-      console.log('DATABASE TABLE SEEDED: ', results);
-      resolve();
-    });
-  });
+const seed = async () => {
+  try {
+    const response = await query(`INSERT INTO user_login (username, password) VALUES ?`, [records]);
+    return response;
+  } catch (err) {
+    return err;
+  }
 };
 
-const setup = () => {
-  up().then(seed());
-};
-
-module.exports = { up, down, seed, setup };
+module.exports = { up, down, seed };
 
 require('make-runnable');

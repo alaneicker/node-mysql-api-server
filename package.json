@@ -6,10 +6,10 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint . --config=.eslintrc.json",
-    "migrate:up": "node server/migrations.js up",
-    "migrate:down": "node server/migrations.js down",
-    "migrate:seed": "node server/migrations.js seed",
-    "migrate:setup": "node server/migrations.js setup",
+    "migrate:up": "NODE_ENV=development node server/migrations.js up",
+    "migrate:down": "NODE_ENV=development node server/migrations.js down",
+    "migrate:seed": "NODE_ENV=development node server/migrations.js seed",
+    "migrate:setup": "NODE_ENV=development node server/migrations.js setup",
     "start:dev": "NODE_ENV=development nodemon server",
     "start": "NODE_ENV=production node server",
     "postinstall": "npm run start"
