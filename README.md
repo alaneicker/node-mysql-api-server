@@ -63,7 +63,7 @@ const response = await fetch('/api/users/users/1?&columns=username');
 ```javascript
 const body = { 
   username: 'my_username', 
-  password: 'bcrypt$2b$14$.5OgqP0JeLVbd/6qQ6O4S.SQyTjQkG/LSBFH3MjLR6G8mnGo1vMFG', 
+  password: 'my_password', 
 };
 
 const response = await fetch('/api/users/add', { method: 'POST', body }); 
