@@ -1,4 +1,4 @@
-const { query } = require('./db-connection');
+const { query, connection } = require('./db-connection');
 const records = require('./seed-data.json');
 
 const up = async () => {
@@ -11,6 +11,7 @@ const up = async () => {
         PRIMARY KEY (id)
       )
     `);
+    connection.end();
     return response;
   } catch (err) {
     return err;
@@ -20,6 +21,7 @@ const up = async () => {
 const down = async () => {
   try {
     const response = await query('DROP TABLE user_login');
+    connection.end();
     return response;
   } catch (err) {
     return err;
@@ -29,6 +31,7 @@ const down = async () => {
 const seed = async () => {
   try {
     const response = await query(`INSERT INTO user_login (username, password) VALUES ?`, [records]);
+    connection.end();
     return response;
   } catch (err) {
     return err;
