@@ -10,8 +10,10 @@ const {
 
 routes.get('/api/:table', async (req, res) => {
   try {
-    const { table } = req.params;
-    const { columns } = req.query;
+    const { 
+      params: { table }, 
+      query: { columns = '*' },
+    } = req;
     const response = await getAllRecords(table, columns);
     res.send(response);
   } catch (err) {
@@ -21,8 +23,10 @@ routes.get('/api/:table', async (req, res) => {
 
 routes.get('/api/:table/:id', async (req, res) => {
   try {
-    const { table, id } = req.params;
-    const { columns } = req.query;
+    const {
+      params: { table, id },
+      query: { columns = '*' }
+    } = req;
     const response = await getRecordById(table, columns, id);
     res.send(response);
   } catch (err) {
@@ -32,8 +36,10 @@ routes.get('/api/:table/:id', async (req, res) => {
 
 routes.post('/api/:table/add', async (req, res) => {
   try {
-    const { table } = req.params;
-    const { body } = req;
+    const {
+      params: { table },
+      body,
+    } = req;
     const response = await addRecord(table, body);
     res.send(response);
   } catch (err) {
@@ -43,8 +49,10 @@ routes.post('/api/:table/add', async (req, res) => {
 
 routes.put('/api/:table/update/:id', async (req, res) => {
   try {
-    const { table, id } = req.params;
-    const { body } = req;
+    const {
+      params: { table, id },
+      body,
+    } = req;
     const response = await updateRecord(table, body, id);
     res.send(response);
   } catch (err) {
@@ -54,7 +62,9 @@ routes.put('/api/:table/update/:id', async (req, res) => {
 
 routes.delete('/api/:table/delete/:id', async (req, res) => {
   try {
-    const { table, id } = req.params;
+    const {
+      params: { table, id },
+    } = req;
     const response = await deleteRecord(table, id);
     res.send(response);
   } catch (err) {
