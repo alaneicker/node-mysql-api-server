@@ -16,23 +16,15 @@ const {
   SOCKET_PATH,
 } = process.env;
 
-const config = Object.assign(
-  {
-    host: DB_HOST,
-    user: DB_USER,
-    password: DB_PASSWORD,
-    database: DB,
-  }, 
-  (DB_CONNECTION_LIMIT 
-    ? { connectionLimit: DB_CONNECTION_LIMIT } 
-    : null),
-  (DB_PORT 
-    ? { port: DB_PORT } 
-    : null),
-  (SOCKET_PATH 
-    ? { socketPath: SOCKET_PATH } 
-    : null),
-);
+const config = {
+  host: DB_HOST,
+  user: DB_USER,
+  password: DB_PASSWORD,
+  database: DB,
+  ...(DB_CONNECTION_LIMIT && { connectionLimit: DB_CONNECTION_LIMIT }),
+  ...(DB_PORT && { port: DB_PORT }),
+  ...(SOCKET_PATH && { socketPath: SOCKET_PATH }),
+};
 
 const connection = mysql.createPool(config);
 const query = promisify(connection.query).bind(connection);
